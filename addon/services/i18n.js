@@ -26,11 +26,6 @@ export default Parent.extend(Evented, {
       until: '5.0.0'
     });
 
-    Ember.deprecate('htmlSafe is a reserved attribute', data['htmlSafe'] === undefined, {
-      id: 'ember-i18n.reserve-htmlSafe',
-      until: '5.0.0'
-    });
-
     const locale = this.get('_locale');
     assert("I18n: Cannot translate when locale is null", locale);
     const count = get(data, 'count');

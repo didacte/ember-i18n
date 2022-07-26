@@ -46,7 +46,7 @@ test('returns "missing translation" translations', function(assert) {
   assert.equal('Missing translation: not.yet.translated', result);
 });
 
-test('warns on the presence of htmlSafe and locale', function(assert) {
+test('warns on the presence of locale', function(assert) {
   const service = this.subject();
   let deprecations = 0;
 
@@ -55,20 +55,17 @@ test('warns on the presence of htmlSafe and locale', function(assert) {
 
     const { id } = options;
 
-    if (id === 'ember-i18n.reserve-htmlSafe' || id === 'ember-i18n.reserve-locale') {
+    if (id === 'ember-i18n.reserve-locale') {
       deprecations += 1;
     }
   };
 
-  service.t('not.yet.translated', { htmlSafe: true });
-  assert.equal(deprecations, 1);
-
   service.t('not.yet.translated', { locale: true });
-  assert.equal(deprecations, 2);
+  assert.equal(deprecations, 1);
 
   service.t('not.yet.translated');
   service.t('not.yet.translated', { some: 'other key' });
-  assert.equal(deprecations, 2);
+  assert.equal(deprecations, 1);
 });
 
 test('emits "missing" events', function(assert) {
